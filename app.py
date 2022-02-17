@@ -49,7 +49,7 @@ def print_team(index, team_name):
     print(f'Total inexperienced: {total_inexperienced}')
     print(f'Average height: {round(sum(height) / len(height), 2)} inches')
     print('\nPlayers on Team:')
-    print('\n'.join(players))
+    print(', '.join(players))
     print('\nGuardians:')
     print(', '.join(guardians))
 
@@ -66,31 +66,37 @@ Here are your choices:
 [2] Quit
         ''')
 
-        choice = int(input('Enter an option: '))
-        while not(choice == 1 or choice == 2):
-            choice = int(input('Please an option from the choices above: '))
-
-        if choice != 1:
-            print('\nThank you for using our app. Have a good day!\n')
-            exit()
-        else:
-            print('')
-            for index, team in enumerate(TEAMS, 1):
-                print(f'[{index}] {team}')
-
-        choose_team = int(input('\nEnter an option: '))
-        while not(choose_team == 1 or choose_team == 2 or choose_team == 3):
-            choose_team = int(input('Please an option from the choices above: '))
-            continue
-
-        if choose_team == 1:
-            print_team(0, panthers)
-        elif choose_team == 2:
-            print_team(1, bandits)
-        elif choose_team == 3:
-            print_team(2, warriors)
-        else:
-            exit()
+        while True:
+            try:
+                choice = 0
+                while not(choice == 1 or choice == 2):
+                    choice = int(input('Choose an option from the choices above: ')) 
+                if choice != 1:
+                    print('\nThank you for using our app. Have a good day!\n')
+                    exit()
+                else:
+                    print('')
+                    for index, team in enumerate(TEAMS, 1):
+                        print(f'[{index}] {team}')
+                    break
+            except ValueError:
+                print("Oops, not a valid response. Please try again.\n")
+        
+        while True:
+            try:
+                choose_team = 0
+                print('')
+                while not(choose_team == 1 or choose_team == 2 or choose_team == 3):
+                    choose_team = int(input('Choose a team: '))
+                if choose_team == 1:
+                    print_team(0, panthers)
+                elif choose_team == 2:
+                    print_team(1, bandits)
+                elif choose_team == 3:
+                    print_team(2, warriors)
+                break
+            except ValueError:
+                print("Oops, not a valid response. Please try again.")
 
         input('\n\nPress ENTER to continue...')
         # Reference: https://stackoverflow.com/questions/59497109/is-there-a-python-3-command-to-clear-the-output-console
